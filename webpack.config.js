@@ -12,6 +12,17 @@ module.exports = {
             test: /\.js$/,
             exclude: /node_modules/,
             loader: "babel-loader"
+        },
+        {
+            test: /\.(jpg|png|svg)$/,
+            loader: "file-loader",
+            options: {
+                name: "[path][name].[ext]",
+            },
+        },
+        {
+            test: /\.css$/i,
+            loader: "style-loader!css-loader",
         }]
     },
     plugins: [

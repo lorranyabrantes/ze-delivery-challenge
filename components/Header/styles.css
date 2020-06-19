@@ -1,0 +1,14 @@
+.header {
+    background-color: #333;
+    display: flex;
+    justify-content: center;
+}
+
+.header__link {
+    width: 65px;
+    padding: 10px 0;
+}
+
+.header__logo {
+    width: 100%;
+}
