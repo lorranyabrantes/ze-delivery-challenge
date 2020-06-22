@@ -1,15 +1,16 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import Logo from "../../assets/imgs/logo.png";
 
 import "./styles.css";
-//import Home from './screens/Home';
+
 
 const Header = () => (
     <header className="header">
-        <a className="header__link" href="/" title="Home">
+        <Link className="header__link" to="/">
             <img className="header__logo" src={Logo} alt="Zé" />
-        </a>
+        </Link>
     </header>
 )
 
