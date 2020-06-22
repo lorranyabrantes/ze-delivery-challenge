@@ -4,3 +4,9 @@
     flex-wrap: wrap;
     padding: 0 10px;
 }
+
+.product-list__error {
+    margin: 15px 0 0;
+    font-size: 14px;
+    color: #333;
+}

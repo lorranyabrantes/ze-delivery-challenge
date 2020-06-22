@@ -1,4 +1,5 @@
 import React from 'react';
+
 import "./styles.css";
 
 class ProductQuantity extends React.Component {
@@ -11,7 +12,6 @@ class ProductQuantity extends React.Component {
 
         this.increase = this.increase.bind(this);
         this.decrease = this.decrease.bind(this);
-
         this.onChange = this.onChange.bind(this);
     }
 

@@ -18,20 +18,12 @@ class Home extends React.Component {
 
         this.searchAddress = this.searchAddress.bind(this);
     }
-    componentDidMount() {
-        // mapService.getGeocoding("Rua Américo Brasiliense, São Paulo", (data) => {
-        //     console.log(data)
-        // });
-    }
-
+    
     searchAddress(event) {
         const address = event.target.value;
 
         if (address.length > 3) {
-            mapService.getGeocoding(address, (data) => {
-                console.log(data)
-                this.setState({ addressList: data })
-            });
+            mapService.getGeocoding(address, (data) => this.setState({ addressList: data }));
         }
     }
 

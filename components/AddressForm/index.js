@@ -1,7 +1,5 @@
 import React from 'react';
-
 import { Link } from 'react-router-dom';
-
 import mapService from '../../api/mapService';
 
 import "./styles.css";
@@ -11,21 +9,29 @@ class AddressForm extends React.Component {
         super();
 
         this.state = {
-            addressList: null
+            addressList: null,
+            timeout: null
         }
 
-        this.searchAddress = this.searchAddress.bind(this);
+        this.onKeyPress = this.onKeyPress.bind(this);
     }
-    
-    searchAddress(event) {
-        const address = event.target.value;
 
-        if (address.length > 3) {
-            mapService.getGeocoding(address, (data) => {
-                console.log(data)
-                this.setState({ addressList: data })
-            });
-        }
+    onKeyPress(event) {
+        const value = event.target.value;
+
+        clearTimeout(this.state.timeout);
+
+        this.setState({
+            timeout: setTimeout(() => {
+                this.searchAddress(value);
+            }, 500)
+        });
+    }
+
+    searchAddress(address) {
+        mapService.getGeocoding(address, (data) => {
+            this.setState({ addressList: (address.length > 3) ? data : null })
+        });
     }
 
     render() {
@@ -33,30 +39,24 @@ class AddressForm extends React.Component {
         return (
             <form className="address-form">
                 <label className="address-form__label" htmlFor="address">Digite seu endereço</label>
-                <input className="address-form__input" onKeyUp={this.searchAddress} type="text" name="address" id="address" placeholder="Ex.: R. Fradique Coutinho, 1632" />
+                <input className="address-form__input" onKeyUp={this.onKeyPress} type="text" name="address" id="address" placeholder="Ex.: Rua Américo Brasiliense, Santo Amaro, São Paulo" />
 
                 {addressList && addressList.length > 0 ?
                     <>
-                    <h2 className="address-list__title">Selecione:</h2>
-                    <ul className="address-list">
-                        {addressList.map((item, index) => {
-                            return (
-                            <li key={index} className="address-list__item">
-                                <Link className="address-list__link" to={{
-                                    pathname: "/produtos",
-                                    geometry: item.geometry
-                                }}>
-                                    {item.formatted}
-                                </Link>
-                            </li>)
-                        })}
-                    </ul>
+                        <h2 className="address-list__title">Selecione:</h2>
+                        <ul className="address-list">
+                            {addressList.map((item, index) => (
+                                <li key={index} className="address-list__item">
+                                    <Link className="address-list__link" to={{ pathname: "/produtos", geometry: item.geometry }}>
+                                        {item.formatted}
+                                    </Link>
+                                </li>
+                            ))}
+                        </ul>
                     </>
                 : addressList != null ?
                     <p className="address-list__error">Desculpe, não encontramos o seu endereço :(</p>
                 : (null)}
-
-                {/* {<button className="address-form__button">Ver produtos</button>} */}
             </form>
         )
     }

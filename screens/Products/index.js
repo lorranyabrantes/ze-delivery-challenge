@@ -1,10 +1,9 @@
 import React from 'react';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
+import Loading from '../../components/Loading';
 import ProductCard from '../../components/ProductCard';
-
 import storeService from '../../api/storeService';
-
 
 import "../../assets/css/reset.css";
 import "./styles.css";
@@ -14,18 +13,20 @@ class Products extends React.Component {
         super();
         this.state = {
             storeData: null,
-            productsData: null
+            productsData: null,
+            showLoading: false
         }
     }
 
     componentDidMount() {
+        this.setState({ showLoading: true });
         this.searchStore();
     }
 
     searchStore() {
-        ///const { geometry } = this.props.location;
+        const { geometry } = this.props.location;
 
-        const geometry = { lat: -23.6284745, lng: -46.7069969 }
+        if (!geometry) location.href = "/";
 
         const date = new Date().toISOString();
 
@@ -45,6 +46,8 @@ class Products extends React.Component {
 
             if (storeData.length) {
                 this.searchProducts(storeData[0].id);
+            } else {
+                this.setState({ showLoading: false });
             }
         });
     }
@@ -68,7 +71,10 @@ class Products extends React.Component {
         }
 
         storeService.search(query, (response) => {
-            this.setState({ productsData: response.poc.products })
+            this.setState({
+                productsData: response.poc.products,
+                showLoading: false
+            });
         });
     }
 
@@ -79,18 +85,19 @@ class Products extends React.Component {
                 <Header />
 
                 <main className="main">
-                    {productsData && productsData.length > 0 ?
+                    {storeData && productsData ?
                         <>
                             <h1 className="main__title">Nossos produtos</h1>
                             <div className="product-list">
                                 {productsData.map((item, index) => <ProductCard key={index.toString()} product={item} />)}
                             </div>
                         </>
-                    : productsData !== null ?
-                        <p className="address-list__error">Desculpe, mas ainda não atendemos seu endereço :(</p>
+                    : storeData && storeData.length < 1 ?
+                            <p className="product-list__error">Desculpe, mas ainda não atendemos seu endereço :(</p>
                     : (null)}
                 </main>
 
+                <Loading isActive={this.state.showLoading} />
                 <Footer />
             </>)
     }

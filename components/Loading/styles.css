@@ -1,0 +1,48 @@
+.loading {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.loading__text {
+    display: block;
+    text-indent: -99999px;
+}
+
+.loading__icon {
+    width: 50px;
+    height: 54px;
+    background-size: cover;
+    background-position: center;
+    display: block;
+    align-self: center;
+}
+
+.loading__icon--left {
+    background-image: url("../../assets/imgs/icon-beer-left.png");
+    animation: cheersLeft .7s infinite linear;
+}
+
+.loading__icon--right {
+    background-image: url("../../assets/imgs/icon-beer-right.png");
+    animation: cheersRight .7s infinite linear;
+
+}
+
+@keyframes cheersLeft {
+	0% { transform: rotate(0deg); }
+    50% { transform: rotate(20deg); }
+	100% { transform: rotate(0deg); }
+}
+
+@keyframes cheersRight {
+	0% { transform: rotate(0deg); }
+    50% { transform: rotate(-20deg); }
+	100% { transform: rotate(0deg); }
+}

@@ -1,16 +1,11 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-
-import Logo from "../../assets/imgs/logo.png";
-
-import UnavailableImage from "../../assets/imgs/unavailable-image.png";
-
 import ProductQuantity  from "../ProductQuantity";
 
 import "./styles.css";
 
+import UnavailableImage from "../../assets/imgs/unavailable-image.png";
+
 const ProductCard = (props) => {
-    console.log(props)
     const { product } = props;
     
     const onImageError = (element) => element.target.src = UnavailableImage;

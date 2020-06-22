@@ -8,7 +8,6 @@ const storeService = {
             method: 'post',
             data: query
         }).then((result) => {
-            console.log(result.data.data)
             callback(result.data.data);
         });
     }
