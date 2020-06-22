@@ -1,0 +1,31 @@
+.product-card__quantity {
+    margin: 10px 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.product-card__input {
+    font-family: 'Open Sans', sans-serif;
+    width: calc(50% - 5px);
+    color: #333;
+    border-radius: 15px;
+    font-weight: 800;
+    height: 30px;
+    border: 1px solid #f1f1f1;
+    text-align: center;
+}
+
+.product-card__button {
+    font-family: 'Open Sans', sans-serif;
+    color: #333;
+    font-size: 12px;
+    font-weight: 800;
+    text-transform: uppercase;
+    width: calc(25% - 5px);
+    height: 30px;
+    border: 0;
+    border-radius: 15px;
+    background-color: #f9c104;
+    cursor: pointer;
+}
