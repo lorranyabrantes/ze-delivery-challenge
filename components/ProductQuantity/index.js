@@ -38,9 +38,9 @@ class ProductQuantity extends React.Component {
     render() {
         return (
             <div className="product-card__quantity">
-                <button className="product-card__button" onClick={this.decrease}>-</button>
+                <button className="product-card__button" id="decrease-button" onClick={this.decrease}>-</button>
                 <input className="product-card__input" pattern="[0-9]*" type="text" onChange={this.onChange} value={this.state.quantity} />
-                <button className="product-card__button" onClick={this.increase}>+</button>
+                <button className="product-card__button" id="increase-button" onClick={this.increase}>+</button>
             </div>
         )
     }
